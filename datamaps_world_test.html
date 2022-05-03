@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8"/>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="./datamaps.world.hires.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+
+
+<h1 style="text-align: center">Puerto Rico Incoming/Outgoing Flights</h1>
+<div id="container" style="position: relative; width: 1300px; height: 700px;"></div>
+
+<fieldset>
+    <legend>Configuration Options:</legend>
+    <span>Select year to filter by: </span><input type="number" id="year" min="1990" max="2021" step="1" required="required" placeholder="1990 - 2021"/>
+    <br><br>
+    <input type="radio" id="incoming" name="flight_type" value="Incoming">
+    <label for="incoming">Incoming Flights to PR</label><br>
+    <input type="radio" id="outgoing" name="flight_type" value="Outgoing">
+    <label for="outgoing">Outgoing Flights from PR</label><br>
+    <br><br>
+    <button type="button" onclick="changeYear()">Get Flights Info</button>
+</fieldset>
+
+<script src="./helper_functions.js"></script>
+</html>
