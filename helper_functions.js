@@ -36,16 +36,17 @@ var map = new Datamap({
     }
 });
 
-function changeYear() {
-    var year = document.getElementById('year').value;
+document.getElementById('flights_button').onclick = changeYear;
 
-    if(!!year) {
-        alert("Year cannot be empty and must be a number!");
+function changeYear() {
+
+    if(!document.getElementById('form').reportValidity()) {
         return;
     }
 
+    var year = document.getElementById('year').value;
     var radio = document.querySelector('input[name="flight_type"]:checked').value;
-<!--        console.log(radio)-->
+//    console.log(radio)
 
     var sql = 'SELECT SUM(CAST("DEPARTURES_SCHEDULED" AS INTEGER)) AS DEPARTURES_SCHEDULED,SUM(CAST("DEPARTURES_PERFORMED" AS INTEGER))' +
         'AS DEPARTURES_PERFORMED,SUM(CAST("PASSENGERS" AS INTEGER)) AS PASSENGERS,SUM(CAST("FREIGHT" AS INTEGER)) AS FREIGHT,' +
@@ -63,7 +64,7 @@ function changeYear() {
         '"DEST_COUNTRY", "DEST_COUNTRY_NAME";'
     }
 
-    console.log(year,typeof(year));
+//    console.log(year,typeof(year));
     data = {
         resource_id: 'cdb53058-f36b-4852-97d9-4177ffd74a9e',
         sql: sql
@@ -74,8 +75,8 @@ function changeYear() {
     data: data,
     dataType: 'jsonp',
     success: function(data) {
-<!--          alert('Total results found: ' + data.result.records.length)-->
-<!--          console.log(data.result.records)-->
+//        alert('Total results found: ' + data.result.records.length)
+//        console.log(data.result.records)
       var arcs = []
 
       if(radio == "Incoming") { // Incoming
@@ -107,7 +108,7 @@ function changeYear() {
             }
       }
 
-<!--        console.log(arcs)-->
+//    console.log(arcs)
     map.arc(arcs, {strokeWidth: 2, animationSpeed: 3000, popupOnHover: true,
                     popupTemplate: function(geography, data) {
                       return '<div class="hoverinfo"><strong>Origin: ' + data.full_origin + '<br>Destination: ' + data.full_destination +
@@ -116,7 +117,7 @@ function changeYear() {
                       '<br>Mail Transported (lbs): ' + data.mail + '</strong></div>';
                     }
                     });
-<!--          map.updateChoropleth();-->
+//                    map.updateChoropleth();
     }
   });
 }
