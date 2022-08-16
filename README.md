@@ -7,6 +7,8 @@ passengers transported, departures scheduled and performed, etc.
 This visualization was done using [Datamaps](http://datamaps.github.io) which
 was created by [markmarkoh](https://github.com/markmarkoh).
 
+Click [here](https://jdp8.github.io/projectPages/PR_Flights_Info/datamaps_world_test.html) to view the project.
+
 ## Data Source
 
 This data is from the

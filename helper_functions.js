@@ -10,7 +10,7 @@ var isoCodeConverterData = {"BD": "BGD", "BE": "BEL", "BF": "BFA", "BG": "BGR", 
 "PL": "POL", "PM": "SPM", "ZM": "ZMB", "EH": "ESH", "EE": "EST", "EG": "EGY", "ZA": "ZAF", "EC": "ECU", "IT": "ITA",
 "VN": "VNM", "SB": "SLB", "ET": "ETH", "SO": "SOM", "ZW": "ZWE", "SA": "SAU", "ES": "ESP", "ER": "ERI", "ME": "MNE",
 "MD": "MDA", "MG": "MDG", "MF": "MAF", "MA": "MAR", "MC": "MCO", "UZ": "UZB", "MM": "MMR", "ML": "MLI", "MO": "MAC",
-"MN": "MNG", "MH": "MHL", "MK": "MKD", "MU": "MUS", "MT": "MLT", "MW": "MWI", "MV": "MDV", "MQ": "MTQ", "MP": "MNP",
+"MN": "MNG", "MH": "MHL", "MK": "MKD", "MU": "MUS", "MT": "MLT", "MW": "MWI", "MV": "MDV", "MQ": "LCA", "MP": "MNP",
 "MS": "MSR", "MR": "MRT", "IM": "IMN", "UG": "UGA", "TZ": "TZA", "MY": "MYS", "MX": "MEX", "IL": "ISR", "FR": "FRA",
 "IO": "IOT", "SH": "SHN", "FI": "FIN", "FJ": "FJI", "FK": "FLK", "FM": "FSM", "FO": "FRO", "NI": "NIC", "NL": "NLD",
 "NO": "NOR", "NA": "NAM", "VU": "VUT", "NC": "NCL", "NE": "NER", "NF": "NFK", "NG": "NGA", "NZ": "NZL", "NP": "NPL",
@@ -36,17 +36,10 @@ var map = new Datamap({
     }
 });
 
-document.getElementById('flights_button').onclick = changeYear;
-
 function changeYear() {
-
-    if(!document.getElementById('form').reportValidity()) {
-        return;
-    }
-
     var year = document.getElementById('year').value;
     var radio = document.querySelector('input[name="flight_type"]:checked').value;
-//    console.log(radio)
+<!--        console.log(radio)-->
 
     var sql = 'SELECT SUM(CAST("DEPARTURES_SCHEDULED" AS INTEGER)) AS DEPARTURES_SCHEDULED,SUM(CAST("DEPARTURES_PERFORMED" AS INTEGER))' +
         'AS DEPARTURES_PERFORMED,SUM(CAST("PASSENGERS" AS INTEGER)) AS PASSENGERS,SUM(CAST("FREIGHT" AS INTEGER)) AS FREIGHT,' +
@@ -64,7 +57,7 @@ function changeYear() {
         '"DEST_COUNTRY", "DEST_COUNTRY_NAME";'
     }
 
-//    console.log(year,typeof(year));
+<!--        console.log(year,typeof(year));-->
     data = {
         resource_id: 'cdb53058-f36b-4852-97d9-4177ffd74a9e',
         sql: sql
@@ -75,8 +68,8 @@ function changeYear() {
     data: data,
     dataType: 'jsonp',
     success: function(data) {
-//        alert('Total results found: ' + data.result.records.length)
-//        console.log(data.result.records)
+<!--          alert('Total results found: ' + data.result.records.length)-->
+<!--          console.log(data.result.records)-->
       var arcs = []
 
       if(radio == "Incoming") { // Incoming
@@ -108,16 +101,16 @@ function changeYear() {
             }
       }
 
-//    console.log(arcs)
+<!--        console.log(arcs)-->
     map.arc(arcs, {strokeWidth: 2, animationSpeed: 3000, popupOnHover: true,
                     popupTemplate: function(geography, data) {
                       return '<div class="hoverinfo"><strong>Origin: ' + data.full_origin + '<br>Destination: ' + data.full_destination +
                       '<br>Departures Scheduled: ' + data.departures_scheduled + '<br>Departures Performed: ' +
-                      data.departures_performed + '<br>Passengers Transported: ' + data.passengers + '<br>Freight Transported (lbs): ' + data.freight +
-                      '<br>Mail Transported (lbs): ' + data.mail + '</strong></div>';
+                      data.departures_performed + '<br>Passengers: ' + data.passengers + '<br>Freight: ' + data.freight +
+                      '<br>Mail: ' + data.mail + '</strong></div>';
                     }
                     });
-//                    map.updateChoropleth();
+<!--          map.updateChoropleth();-->
     }
   });
 }
