@@ -36,7 +36,14 @@ var map = new Datamap({
     }
 });
 
+var form = document.getElementById('validationForm');
+document.getElementById('yearButton').onclick = changeYear;
+
 function changeYear() {
+    if(!form.reportValidity()) {
+        return;
+    }
+
     var year = document.getElementById('year').value;
     var radio = document.querySelector('input[name="flight_type"]:checked').value;
 <!--        console.log(radio)-->

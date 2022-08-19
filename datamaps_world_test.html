@@ -13,14 +13,16 @@
 
 <fieldset>
     <legend>Configuration Options:</legend>
-    <span>Select year to filter by: </span><input type="number" id="year" min="1990" max="2021" step="1" required="required" placeholder="1990 - 2021"/>
-    <br><br>
-    <input type="radio" id="incoming" name="flight_type" value="Incoming">
-    <label for="incoming">Incoming Flights to PR</label><br>
-    <input type="radio" id="outgoing" name="flight_type" value="Outgoing">
-    <label for="outgoing">Outgoing Flights from PR</label><br>
-    <br><br>
-    <button type="button" onclick="changeYear()">Get Flights Info</button>
+    <form id="validationForm">
+        <span>Select year to filter by: </span><input type="number" id="year" min="1990" max="2021" step="1" required placeholder="1990 - 2021"/>
+        <br><br>
+        <input type="radio" id="incoming" name="flight_type" value="Incoming" required>
+        <label for="incoming">Incoming Flights to PR</label><br>
+        <input type="radio" id="outgoing" name="flight_type" value="Outgoing" required>
+        <label for="outgoing">Outgoing Flights from PR</label><br>
+        <br><br>
+        <button type="button" id="yearButton">Get Flights Info</button>
+    </form>
 </fieldset>
 
 <script src="./helper_functions.js"></script>
